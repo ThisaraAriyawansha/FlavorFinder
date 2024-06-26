@@ -11,7 +11,7 @@ void main() async {
       builder: (context) => MyApp(),
     ));
   } catch (e) {
-    runApp(MaterialApp(
+    runApp(const MaterialApp(
       home: Scaffold(),
     ));
   }
@@ -28,9 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       // home: const HomePage(),
-      home: MyHomePage(
-        title: 'FlavorFinder',
-      ),
+      home: MyHomePage( ),
       debugShowCheckedModeBanner: false,
     );
   }
