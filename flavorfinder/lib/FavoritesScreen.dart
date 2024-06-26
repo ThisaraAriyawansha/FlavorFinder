@@ -70,7 +70,7 @@ class FavoritesScreen extends StatelessWidget {
             child: GridView.count(
               crossAxisCount: 2,
               children: [
-                _buildGridItem(Icons.person, 'User Profile', () {
+                _buildGridItem(Icons.food_bank, 'Nutrition Tracker', () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => NutritionTracker()),

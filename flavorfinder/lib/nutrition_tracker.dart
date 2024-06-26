@@ -1,4 +1,3 @@
-// nutrition_tracker.dart
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -51,33 +50,71 @@ class _NutritionTrackerState extends State<NutritionTracker> {
         .toList();
   }
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null) {
+      _dateController.text =
+          picked.toString(); // Update the text field with the selected date
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nutrition Tracker'),
+        backgroundColor: Colors.black,
+        title: Text(
+          'Nutrition Tracker',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Container(
+        color: Colors.black,
+        padding: EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Form(
               key: _formKey,
               child: Column(
                 children: [
-                  TextFormField(
-                    controller: _dateController,
-                    decoration: InputDecoration(labelText: 'Date'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a date';
-                      }
-                      return null;
+                  GestureDetector(
+                    onTap: () {
+                      _selectDate(context); // Call function to show date picker
                     },
+                    child: AbsorbPointer(
+                      child: TextFormField(
+                        controller: _dateController,
+                        decoration: InputDecoration(
+                          labelText: 'Date',
+                          fillColor: Colors.white,
+                          filled: true,
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a date';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
                   ),
+                  SizedBox(height: 10),
                   TextFormField(
                     controller: _caloriesController,
-                    decoration: InputDecoration(labelText: 'Calories'),
+                    decoration: InputDecoration(
+                      labelText: 'Calories',
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(),
+                    ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -86,9 +123,15 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                       return null;
                     },
                   ),
+                  SizedBox(height: 10),
                   TextFormField(
                     controller: _proteinsController,
-                    decoration: InputDecoration(labelText: 'Proteins (g)'),
+                    decoration: InputDecoration(
+                      labelText: 'Proteins (g)',
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(),
+                    ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -97,9 +140,15 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                       return null;
                     },
                   ),
+                  SizedBox(height: 10),
                   TextFormField(
                     controller: _fatsController,
-                    decoration: InputDecoration(labelText: 'Fats (g)'),
+                    decoration: InputDecoration(
+                      labelText: 'Fats (g)',
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(),
+                    ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -108,9 +157,15 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                       return null;
                     },
                   ),
+                  SizedBox(height: 10),
                   TextFormField(
                     controller: _carbsController,
-                    decoration: InputDecoration(labelText: 'Carbs (g)'),
+                    decoration: InputDecoration(
+                      labelText: 'Carbs (g)',
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(),
+                    ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -128,12 +183,19 @@ class _NutritionTrackerState extends State<NutritionTracker> {
               ),
             ),
             SizedBox(height: 20),
-            _entries.isNotEmpty
-                ? Expanded(
-                    child: SfCartesianChart(
+            Expanded(
+              flex: 3,
+              child: _entries.isNotEmpty
+                  ? SfCartesianChart(
                       primaryXAxis: CategoryAxis(),
-                      title: ChartTitle(text: 'Nutritional Intake'),
-                      legend: Legend(isVisible: true),
+                      title: ChartTitle(
+                        text: 'Nutritional Intake',
+                        textStyle: TextStyle(color: Colors.white),
+                      ),
+                      legend: Legend(
+                        isVisible: true,
+                        textStyle: TextStyle(color: Colors.white),
+                      ),
                       tooltipBehavior: TooltipBehavior(enable: true),
                       series: <LineSeries<ChartData, String>>[
                         LineSeries<ChartData, String>(
@@ -161,18 +223,29 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                           name: 'Carbs',
                         ),
                       ],
+                    )
+                  : Center(
+                      child: Text(
+                        'No entries yet.',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                  )
-                : Text('No entries yet.'),
+            ),
             Expanded(
+              flex: 2,
               child: ListView.builder(
                 itemCount: _entries.length,
                 itemBuilder: (context, index) {
                   final entry = _entries[index];
                   return ListTile(
-                    title: Text('${entry['date']}'),
+                    title: Text(
+                      '${entry['date']}',
+                      style: TextStyle(color: Colors.white),
+                    ),
                     subtitle: Text(
-                        'Calories: ${entry['calories']}, Proteins: ${entry['proteins']}g, Fats: ${entry['fats']}g, Carbs: ${entry['carbs']}g'),
+                      'Calories: ${entry['calories']}, Proteins: ${entry['proteins']}g, Fats: ${entry['fats']}g, Carbs: ${entry['carbs']}g',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   );
                 },
               ),

@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^0.22.0
-  device_preview: ^1.1.0
+  device_preview: ^1.2.0
   cupertino_icons: ^1.0.6
   http: ^1.2.1
   flutter_charts: ^0.2.0
@@ -25,13 +25,13 @@ flutter:
   uses-material-design: true
 
 assets:
-  - assets/placeholder.webp
-  - assets/logo.png
-  - assets/Pasta.jpg
-  - assets/Chicken.jpg
-  - assets/coconut-sambal.jpg
-  - assets/curry.jpg
-  - assets/fish.jpg
-  - assets/Hoppers.jpeg
-  - assets/Pasta.jpg
-  - assets/Pasta.jpg
+- assets/placeholder.webp
+- assets/logo.png
+- assets/Pasta.jpg
+- assets/Chicken.jpg
+- assets/coconut-sambal.jpg
+- assets/curry.jpg
+- assets/fish.jpg
+- assets/Hoppers.jpeg
+- assets/Pasta.jpg
+- assets/Pasta.jpg
