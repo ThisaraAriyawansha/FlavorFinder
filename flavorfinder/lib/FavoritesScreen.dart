@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './HealthTipsScreen.dart';
 import './RecipeDetailScreen.dart';
 import './RecipeProvider.dart';
+import './nutrition_tracker.dart';
 
 class FavoritesScreen extends StatelessWidget {
   @override
@@ -73,7 +74,7 @@ class FavoritesScreen extends StatelessWidget {
                 _buildGridItem(Icons.person, 'User Profile', () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MyApp()),
+                    MaterialPageRoute(builder: (context) => NutritionTracker()),
                   );
                 }),
                 _buildGridItem(Icons.local_dining, 'Recipes', () {
