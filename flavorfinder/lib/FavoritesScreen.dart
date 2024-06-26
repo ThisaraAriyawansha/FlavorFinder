@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './HealthTipsScreen.dart';
 import './RecipeProvider.dart';
 import './nutrition_tracker.dart';
+import './DietaryPlanUI.dart';
 
 class FavoritesScreen extends StatelessWidget {
   @override
@@ -80,6 +81,12 @@ class FavoritesScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => MyApp()),
+                  );
+                }),
+                _buildGridItem(Icons.local_florist, 'Dietary Plan', () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DietaryPlanUI()),
                   );
                 }),
                 _buildGridItem(Icons.lightbulb, 'Health Tips', () {
