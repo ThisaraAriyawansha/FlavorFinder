@@ -238,7 +238,7 @@ class RecipeTile extends StatelessWidget {
                           child: Text(
                             'Close',
                             style: TextStyle(
-                              color: Colors.blue,
+                              color: const Color.fromARGB(255, 0, 0, 0),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
