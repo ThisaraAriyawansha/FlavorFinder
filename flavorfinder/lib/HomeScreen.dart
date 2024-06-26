@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'RecipeProvider.dart'; // Assuming this is where RecipeProvider and Recipe are imported from
-
 void main() {
   runApp(const MyApp());
 }
@@ -47,8 +45,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final recipeProvider = Provider.of<RecipeProvider>(context); // Adjust this according to your actual provider usage
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
