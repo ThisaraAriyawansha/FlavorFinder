@@ -15,7 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   http: ^1.2.1
   flutter_charts: ^0.2.0
-  syncfusion_flutter_charts: ^19.4.56
+  syncfusion_flutter_charts: ^20.1.54 # Updated version to ensure compatibility
 
 dev_dependencies:
   flutter_test:
@@ -25,13 +25,13 @@ flutter:
   uses-material-design: true
 
 assets:
-- assets/placeholder.webp
-- assets/logo.png
-- assets/Pasta.jpg
-- assets/Chicken.jpg
-- assets/coconut-sambal.jpg
-- assets/curry.jpg
-- assets/fish.jpg
-- assets/Hoppers.jpeg
-- assets/Pasta.jpg
-- assets/Pasta.jpg
+  - assets/placeholder.webp
+  - assets/logo.png
+  - assets/Pasta.jpg
+  - assets/Chicken.jpg
+  - assets/coconut-sambal.jpg
+  - assets/curry.jpg
+  - assets/fish.jpg
+  - assets/Hoppers.jpeg
+  - assets/Pasta.jpg
+  - assets/Pasta.jpg

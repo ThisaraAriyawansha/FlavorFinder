@@ -1,6 +1,6 @@
 // nutrition_tracker.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_charts/flutter_charts.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class NutritionTracker extends StatefulWidget {
   @override
@@ -45,8 +45,10 @@ class _NutritionTrackerState extends State<NutritionTracker> {
     }
   }
 
-  List<double> getData(String nutrient) {
-    return _entries.map((entry) => entry[nutrient].toDouble()).toList();
+  List<ChartData> getChartData(String nutrient) {
+    return _entries
+        .map((entry) => ChartData(entry['date'], entry[nutrient].toDouble()))
+        .toList();
   }
 
   @override
@@ -128,18 +130,37 @@ class _NutritionTrackerState extends State<NutritionTracker> {
             SizedBox(height: 20),
             _entries.isNotEmpty
                 ? Expanded(
-                    child: LineChart(
-                      painter: LineChartPainter(
-                        data: LineChartData(
-                          xLabels: _entries.map((entry) => entry['date']).toList(),
-                          lines: [
-                            LineChartLine(data: getData('calories'), legend: 'Calories'),
-                            LineChartLine(data: getData('proteins'), legend: 'Proteins'),
-                            LineChartLine(data: getData('fats'), legend: 'Fats'),
-                            LineChartLine(data: getData('carbs'), legend: 'Carbs'),
-                          ],
-                        ), lineChartContainer: null,
-                      ), container: null,
+                    child: SfCartesianChart(
+                      primaryXAxis: CategoryAxis(),
+                      title: ChartTitle(text: 'Nutritional Intake'),
+                      legend: Legend(isVisible: true),
+                      tooltipBehavior: TooltipBehavior(enable: true),
+                      series: <LineSeries<ChartData, String>>[
+                        LineSeries<ChartData, String>(
+                          dataSource: getChartData('calories'),
+                          xValueMapper: (ChartData data, _) => data.date,
+                          yValueMapper: (ChartData data, _) => data.value,
+                          name: 'Calories',
+                        ),
+                        LineSeries<ChartData, String>(
+                          dataSource: getChartData('proteins'),
+                          xValueMapper: (ChartData data, _) => data.date,
+                          yValueMapper: (ChartData data, _) => data.value,
+                          name: 'Proteins',
+                        ),
+                        LineSeries<ChartData, String>(
+                          dataSource: getChartData('fats'),
+                          xValueMapper: (ChartData data, _) => data.date,
+                          yValueMapper: (ChartData data, _) => data.value,
+                          name: 'Fats',
+                        ),
+                        LineSeries<ChartData, String>(
+                          dataSource: getChartData('carbs'),
+                          xValueMapper: (ChartData data, _) => data.date,
+                          yValueMapper: (ChartData data, _) => data.value,
+                          name: 'Carbs',
+                        ),
+                      ],
                     ),
                   )
                 : Text('No entries yet.'),
@@ -161,4 +182,10 @@ class _NutritionTrackerState extends State<NutritionTracker> {
       ),
     );
   }
+}
+
+class ChartData {
+  ChartData(this.date, this.value);
+  final String date;
+  final double value;
 }

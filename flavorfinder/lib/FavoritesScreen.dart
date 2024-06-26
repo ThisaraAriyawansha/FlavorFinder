@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import './HealthTipsScreen.dart';
-import './RecipeDetailScreen.dart';
 import './RecipeProvider.dart';
 import './nutrition_tracker.dart';
 
