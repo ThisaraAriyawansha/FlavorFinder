@@ -56,10 +56,18 @@ class _NutritionTrackerState extends State<NutritionTracker> {
       initialDate: DateTime.now(),
       firstDate: DateTime(2015, 8),
       lastDate: DateTime(2101),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.dark(), // Customize the theme of the date picker
+          child: child!,
+        );
+      },
     );
     if (picked != null) {
-      _dateController.text =
-          picked.toString(); // Update the text field with the selected date
+      setState(() {
+        _dateController.text =
+            picked.toString(); // Update the text field with the selected date
+      });
     }
   }
 
@@ -96,6 +104,8 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                           fillColor: Colors.white,
                           filled: true,
                           border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.calendar_today,
+                              color: Colors.redAccent),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -114,6 +124,7 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                       fillColor: Colors.white,
                       filled: true,
                       border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.fastfood, color: Colors.redAccent),
                     ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
@@ -131,6 +142,8 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                       fillColor: Colors.white,
                       filled: true,
                       border: OutlineInputBorder(),
+                      prefixIcon:
+                          Icon(Icons.fitness_center, color: Colors.redAccent),
                     ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
@@ -148,6 +161,8 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                       fillColor: Colors.white,
                       filled: true,
                       border: OutlineInputBorder(),
+                      prefixIcon:
+                          Icon(Icons.local_dining, color: Colors.redAccent),
                     ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
@@ -165,6 +180,8 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                       fillColor: Colors.white,
                       filled: true,
                       border: OutlineInputBorder(),
+                      prefixIcon:
+                          Icon(Icons.local_pizza, color: Colors.redAccent),
                     ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
@@ -177,8 +194,24 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _addEntry,
-                    child: Text('Add Entry'),
-                  ),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.redAccent, // Text color
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(8), // Rounded corners
+                      ),
+                      elevation: 4, // Shadow
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.add, color: Colors.white), // Icon color
+                        SizedBox(width: 8), // Space between icon and text
+                        Text('Add Entry'),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
