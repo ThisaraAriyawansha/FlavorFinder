@@ -4,15 +4,11 @@ import 'package:flutter/material.dart';
 class DietaryPlan {
   final String title;
   final String description;
-  final IconData icon;
-  final Color color;
   List<String> meals; // Example list of meals in the plan
 
   DietaryPlan({
     required this.title,
     required this.description,
-    required this.icon,
-    required this.color,
     required this.meals,
   });
 }
@@ -22,75 +18,12 @@ List<DietaryPlan> preMadePlans = [
   DietaryPlan(
     title: 'Weight Loss Plan',
     description: 'Designed to help you lose weight.',
-    icon: Icons.fitness_center,
-    color: Colors.red,
     meals: ['Breakfast', 'Lunch', 'Dinner', 'Snacks'],
   ),
   DietaryPlan(
     title: 'Muscle Gain Plan',
     description: 'Tailored to support muscle growth and recovery.',
-    icon: Icons.fitness_center,
-    color: Colors.green,
     meals: ['Breakfast', 'Morning Snack', 'Lunch', 'Afternoon Snack', 'Dinner'],
-  ),
-  DietaryPlan(
-    title: 'Keto Plan',
-    description: 'High fat, low carb diet to help you enter ketosis.',
-    icon: Icons.local_dining,
-    color: Colors.yellow,
-    meals: ['Breakfast', 'Lunch', 'Dinner', 'Snacks'],
-  ),
-  DietaryPlan(
-    title: 'Vegan Plan',
-    description: 'Plant-based diet with a variety of healthy meals.',
-    icon: Icons.eco,
-    color: Colors.green,
-    meals: ['Breakfast', 'Lunch', 'Dinner', 'Snacks'],
-  ),
-  DietaryPlan(
-    title: 'Mediterranean Plan',
-    description:
-        'Inspired by the traditional dietary patterns of the Mediterranean region.',
-    icon: Icons.local_dining,
-    color: Colors.blue,
-    meals: ['Breakfast', 'Lunch', 'Dinner', 'Snacks'],
-  ),
-  DietaryPlan(
-    title: 'Paleo Plan',
-    description: 'Focuses on whole foods and eliminates processed foods.',
-    icon: Icons.local_dining,
-    color: Colors.orange,
-    meals: ['Breakfast', 'Lunch', 'Dinner', 'Snacks'],
-  ),
-  DietaryPlan(
-    title: 'Low Carb Plan',
-    description: 'Reduces carbohydrate intake to help with weight management.',
-    icon: Icons.local_dining,
-    color: Colors.deepPurple,
-    meals: ['Breakfast', 'Lunch', 'Dinner', 'Snacks'],
-  ),
-  DietaryPlan(
-    title: 'Intermittent Fasting Plan',
-    description:
-        'Includes specific eating and fasting windows to promote weight loss.',
-    icon: Icons.access_time,
-    color: Colors.grey,
-    meals: ['Breakfast', 'Lunch', 'Dinner', 'Snacks'],
-  ),
-  DietaryPlan(
-    title: 'Diabetic Friendly Plan',
-    description: 'Designed to help manage blood sugar levels.',
-    icon: Icons.favorite,
-    color: Colors.red,
-    meals: ['Breakfast', 'Lunch', 'Dinner', 'Snacks'],
-  ),
-  DietaryPlan(
-    title: 'Heart Healthy Plan',
-    description:
-        'Focuses on foods that are beneficial for cardiovascular health.',
-    icon: Icons.favorite,
-    color: Colors.blue,
-    meals: ['Breakfast', 'Lunch', 'Dinner', 'Snacks'],
   ),
 ];
 
@@ -108,25 +41,11 @@ class DietaryPlanUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark, // Set overall dark theme
-      ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Dietary Plans',
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.black,
-          iconTheme: IconThemeData(color: Colors.white),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back,
-                color: Colors.white), // Arrow icon with white color
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
+          title: Text('Dietary Plans'),
+          backgroundColor:
+              Colors.black, // Set app bar background color to black
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -146,13 +65,10 @@ class DietaryPlanUI extends StatelessWidget {
                       elevation: 2,
                       margin: EdgeInsets.symmetric(vertical: 8),
                       child: ListTile(
-                        leading: Icon(
-                          preMadePlans[index].icon,
-                          color: preMadePlans[index].color,
-                        ),
                         title: Text(preMadePlans[index].title),
                         subtitle: Text(preMadePlans[index].description),
                         onTap: () {
+                          // Navigate to plan details or customization page
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -185,10 +101,12 @@ class PlanDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           plan.title,
-          style: TextStyle(color: Colors.white),
+          style:
+              TextStyle(color: Colors.white), // Set title text color to white
         ),
-        backgroundColor: Colors.black,
-        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Colors.black, // Set app bar background color to black
+        iconTheme:
+            IconThemeData(color: Colors.white), // Set back arrow color to white
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -219,13 +137,15 @@ class PlanDetailsScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text(plan.meals[index]),
+                    // Add meal details or customization options as needed
                   );
                 },
               ),
             ),
             SizedBox(height: 20),
-            ElevatedButton.icon(
+            ElevatedButton(
               onPressed: () {
+                // Navigate to customization screen
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -233,18 +153,7 @@ class PlanDetailsScreen extends StatelessWidget {
                   ),
                 );
               },
-              icon: Icon(
-                Icons.edit,
-                color: Colors.redAccent,
-              ),
-              label: Text(
-                'Customize Plan',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.redAccent,
-                ),
-              ),
+              child: Text('Customize Plan'),
             ),
           ],
         ),
@@ -268,20 +177,11 @@ class _CustomizePlanScreenState extends State<CustomizePlanScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize selected meals with an empty list for each meal type
-    selectedMeals = {
-      'Breakfast': [],
-      'Lunch': [],
-      'Dinner': [],
-      'Snacks': [],
-      'Morning Snack': [],
-      'Afternoon Snack': [],
-    };
+    selectedMeals = {for (var meal in widget.plan.meals) meal: []};
   }
 
   void _savePlan() {
     setState(() {
-      // Update the plan's meals based on selectedMeals
       widget.plan.meals = selectedMeals.entries
           .where((entry) => entry.value.isNotEmpty)
           .map((entry) => '${entry.key}: ${entry.value.join(', ')}')
@@ -294,18 +194,8 @@ class _CustomizePlanScreenState extends State<CustomizePlanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Customize ${widget.plan.title}',
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.black,
-        iconTheme: IconThemeData(color: Colors.white),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        title: Text('Customize ${widget.plan.title}'),
+        backgroundColor: Colors.black, // Set app bar background color to black
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -319,37 +209,27 @@ class _CustomizePlanScreenState extends State<CustomizePlanScreen> {
             SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
-                itemCount: mealSuggestions.length,
+                itemCount: mealSuggestions.keys.length,
                 itemBuilder: (context, index) {
-                  String mealType = mealSuggestions.keys.toList()[index];
+                  String mealType = mealSuggestions.keys.elementAt(index);
                   return ExpansionTile(
-                    title: Text(
-                      mealType,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    title: Text(mealType),
                     children: mealSuggestions[mealType]!
                         .map((meal) => CheckboxListTile(
-                              title: Text(
-                                meal,
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 255, 255,
-                                      255), // Customize text color if needed
-                                ),
-                              ),
-                              value: selectedMeals[mealType]!.contains(meal),
-                              onChanged: (value) {
+                              title: Text(meal),
+                              value: selectedMeals[mealType]?.contains(meal) ??
+                                  false,
+                              onChanged: (bool? value) {
                                 setState(() {
-                                  if (value!) {
-                                    selectedMeals[mealType]!.add(meal);
+                                  if (value == true) {
+                                    selectedMeals[mealType]?.add(meal);
                                   } else {
-                                    selectedMeals[mealType]!.remove(meal);
+                                    selectedMeals[mealType]?.remove(meal);
                                   }
                                 });
                               },
                               activeColor:
-                                  Colors.redAccent, // Change checkbox color
-                              checkColor:
-                                  Colors.white, // Change check mark color
+                                  Colors.red, 
                             ))
                         .toList(),
                   );
@@ -357,23 +237,17 @@ class _CustomizePlanScreenState extends State<CustomizePlanScreen> {
               ),
             ),
             SizedBox(height: 20),
-            ElevatedButton.icon(
+            ElevatedButton(
               onPressed: _savePlan,
-              icon: Icon(
-                Icons.save,
-                color: Colors.redAccent, // Set icon color
-              ),
-              label: Text(
-                'Save Changes',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.redAccent, // Set text color
-                ),
-              ),
+              child: Text('Save Plan'),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+void main() {
+  runApp(DietaryPlanUI());
 }
