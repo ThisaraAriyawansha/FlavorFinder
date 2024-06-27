@@ -8,6 +8,7 @@ class HealthTipsScreen extends StatelessWidget {
       details:
           "Proper hydration helps maintain bodily functions and overall health. It regulates body temperature, aids digestion, and flushes out toxins.",
       icon: Icons.local_drink,
+      iconColor: Colors.blueAccent, // Custom icon color
     ),
     HealthTip(
       title: "Eat Balanced Meals",
@@ -15,6 +16,7 @@ class HealthTipsScreen extends StatelessWidget {
       details:
           "Balanced meals provide essential nutrients for energy and well-being. Include fruits, vegetables, whole grains, lean proteins, and healthy fats in your diet.",
       icon: Icons.restaurant,
+      iconColor: Colors.greenAccent, // Custom icon color
     ),
     HealthTip(
       title: "Regular Exercise",
@@ -22,6 +24,7 @@ class HealthTipsScreen extends StatelessWidget {
       details:
           "Exercise improves cardiovascular health, muscle strength, and mental well-being. It helps maintain a healthy weight, boosts mood, and reduces the risk of chronic diseases.",
       icon: Icons.fitness_center,
+      iconColor: Colors.orangeAccent, // Custom icon color
     ),
     HealthTip(
       title: "Get Sufficient Sleep",
@@ -29,6 +32,7 @@ class HealthTipsScreen extends StatelessWidget {
       details:
           "Adequate sleep is crucial for overall health and well-being. It enhances brain function, supports immune function, and promotes physical and mental recovery.",
       icon: Icons.nights_stay,
+      iconColor: Colors.purpleAccent, // Custom icon color
     ),
     HealthTip(
       title: "Manage Stress",
@@ -36,6 +40,7 @@ class HealthTipsScreen extends StatelessWidget {
       details:
           "Chronic stress can negatively impact health. Practice relaxation techniques like deep breathing, meditation, or yoga to reduce stress levels and improve resilience.",
       icon: Icons.spa,
+      iconColor: Colors.tealAccent, // Custom icon color
     ),
     HealthTip(
       title: "Maintain Social Connections",
@@ -43,6 +48,7 @@ class HealthTipsScreen extends StatelessWidget {
       details:
           "Social connections contribute to mental and emotional well-being. They provide support, reduce feelings of loneliness, and promote a sense of belonging.",
       icon: Icons.group,
+      iconColor: Colors.amberAccent, // Custom icon color
     ),
     HealthTip(
       title: "Limit Alcohol Consumption",
@@ -50,6 +56,7 @@ class HealthTipsScreen extends StatelessWidget {
       details:
           "Excessive alcohol consumption can harm your health. Limit intake to moderate levels: up to one drink per day for women and up to two drinks per day for men.",
       icon: Icons.local_bar,
+      iconColor: Colors.redAccent, // Custom icon color
     ),
   ];
 
@@ -84,8 +91,9 @@ class HealthTipsScreen extends StatelessWidget {
             child: ListTile(
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              tileColor: Colors.grey[800], // Background color of the ListTile
-              leading: Icon(tip.icon, color: Colors.redAccent, size: 32),
+              tileColor: const Color.fromARGB(
+                  255, 15, 14, 14), // Background color of the ListTile
+              leading: Icon(tip.icon, color: tip.iconColor, size: 32),
               title: Text(
                 tip.title,
                 style: TextStyle(
@@ -99,7 +107,8 @@ class HealthTipsScreen extends StatelessWidget {
                 child: Text(
                   tip.description,
                   style: TextStyle(
-                    color: Colors.white70, // Description text color
+                    color: Color.fromARGB(
+                        255, 255, 255, 255), // Description text color
                     fontSize: 14,
                   ),
                 ),
@@ -121,15 +130,15 @@ class HealthTipsScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor:
-              Colors.grey[800], // Background color of the AlertDialog
+          backgroundColor: const Color.fromARGB(
+              255, 19, 18, 18), // Background color of the AlertDialog
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
           title: Text(
             tip.title,
             style: TextStyle(
-              color: Colors.redAccent,
+              color: tip.iconColor, // Match dialog title color to icon color
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
@@ -150,7 +159,7 @@ class HealthTipsScreen extends StatelessWidget {
             TextButton(
               child: Text(
                 'Close',
-                style: TextStyle(color: Colors.redAccent, fontSize: 18),
+                style: TextStyle(color: tip.iconColor, fontSize: 18),
               ),
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
@@ -168,11 +177,13 @@ class HealthTip {
   final String description;
   final String details;
   final IconData icon;
+  final Color iconColor; // Added property for custom icon color
 
   HealthTip({
     required this.title,
     required this.description,
     required this.details,
     required this.icon,
+    this.iconColor = Colors.redAccent, // Default icon color
   });
 }

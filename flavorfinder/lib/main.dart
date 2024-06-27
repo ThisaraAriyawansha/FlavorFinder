@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import './HomeScreen.dart';
+import './StartScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       // home: const HomePage(),
-      home: MyHomePage( ),
+      home: StartScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
