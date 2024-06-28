@@ -170,6 +170,15 @@ class RecipeSection extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 20.0),
+          Text(
+            'Explore a variety of recipes that cater to different dietary needs, preferences, and cuisines. From quick and easy meals to gourmet dishes, find the perfect recipe to suit your taste and lifestyle.',
+            style: TextStyle(
+              color: Colors.white54,
+              fontSize: 14.0,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 20.0),
           Animate(
             effects: [ScaleEffect(duration: 500.ms, curve: Curves.easeInOut)],
             child: Image.asset(
@@ -211,6 +220,15 @@ class DietPlanSection extends StatelessWidget {
             style: TextStyle(
               color: Colors.white70,
               fontSize: 18.0,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 20.0),
+          Text(
+            'Whether you\'re looking to lose weight, build muscle, or simply maintain a healthy lifestyle, our personalized diet plans are tailored to meet your specific needs. Each plan is designed to provide balanced nutrition and delicious meals.',
+            style: TextStyle(
+              color: Colors.white54,
+              fontSize: 14.0,
             ),
             textAlign: TextAlign.center,
           ),
@@ -260,6 +278,15 @@ class NutritionTrackSection extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 20.0),
+          Text(
+            'Monitor your daily intake of calories, macronutrients, and micronutrients to ensure you\'re meeting your health goals. Our nutrition tracking tools make it easy to log your meals and snacks, giving you insights into your dietary habits.',
+            style: TextStyle(
+              color: Colors.white54,
+              fontSize: 14.0,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 20.0),
           Animate(
             effects: [ScaleEffect(duration: 500.ms, curve: Curves.easeInOut)],
             child: Image.asset(
@@ -297,10 +324,19 @@ class HealthTipsSection extends StatelessWidget {
           ),
           SizedBox(height: 20.0),
           Text(
-            'Get daily tips for a healthier lifestyle.',
+            'Stay healthy with daily tips.',
             style: TextStyle(
               color: Colors.white70,
               fontSize: 18.0,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 20.0),
+          Text(
+            'Our daily health tips cover a wide range of topics, from fitness and nutrition to mental well-being and preventive care. Stay informed and motivated with practical advice to help you lead a healthier life.',
+            style: TextStyle(
+              color: Colors.white54,
+              fontSize: 14.0,
             ),
             textAlign: TextAlign.center,
           ),
@@ -319,22 +355,19 @@ class HealthTipsSection extends StatelessWidget {
   }
 }
 
-extension WidgetModifier on Widget {
+extension PaddingExtension on Widget {
   Widget paddedWithShadow() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black45,
-              offset: Offset(5, 5),
-              blurRadius: 10.0,
-            ),
-          ],
+      child: Material(
+        elevation: 8.0,
+        borderRadius: BorderRadius.circular(15.0),
+        shadowColor: Colors.black,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15.0),
+          child: this,
         ),
-        child: this,
-      ),
+      ).animate().scale(duration: 500.ms, curve: Curves.easeInOut),
     );
   }
 }

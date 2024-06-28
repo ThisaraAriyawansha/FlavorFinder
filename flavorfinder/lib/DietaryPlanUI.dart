@@ -142,25 +142,29 @@ class DietaryPlanUI extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: preMadePlans.length,
                   itemBuilder: (context, index) {
-                    return Card(
-                      elevation: 2,
+                    return AnimatedContainer(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
                       margin: EdgeInsets.symmetric(vertical: 8),
-                      child: ListTile(
-                        leading: Icon(
-                          preMadePlans[index].icon,
-                          color: preMadePlans[index].color,
+                      child: Card(
+                        elevation: 2,
+                        child: ListTile(
+                          leading: Icon(
+                            preMadePlans[index].icon,
+                            color: preMadePlans[index].color,
+                          ),
+                          title: Text(preMadePlans[index].title),
+                          subtitle: Text(preMadePlans[index].description),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PlanDetailsScreen(
+                                    plan: preMadePlans[index]),
+                              ),
+                            );
+                          },
                         ),
-                        title: Text(preMadePlans[index].title),
-                        subtitle: Text(preMadePlans[index].description),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  PlanDetailsScreen(plan: preMadePlans[index]),
-                            ),
-                          );
-                        },
                       ),
                     );
                   },
@@ -264,6 +268,7 @@ class CustomizePlanScreen extends StatefulWidget {
 
 class _CustomizePlanScreenState extends State<CustomizePlanScreen> {
   late Map<String, List<String>> selectedMeals;
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -277,6 +282,13 @@ class _CustomizePlanScreenState extends State<CustomizePlanScreen> {
       'Morning Snack': [],
       'Afternoon Snack': [],
     };
+
+    // Simulate a delay to show loading animation
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
   }
 
   void _savePlan() {
@@ -309,71 +321,76 @@ class _CustomizePlanScreenState extends State<CustomizePlanScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Select Meals:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: mealSuggestions.length,
-                itemBuilder: (context, index) {
-                  String mealType = mealSuggestions.keys.toList()[index];
-                  return ExpansionTile(
-                    title: Text(
-                      mealType,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    children: mealSuggestions[mealType]!
-                        .map((meal) => CheckboxListTile(
+        child: _isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: mealSuggestions.length,
+                      itemBuilder: (context, index) {
+                        String mealType = mealSuggestions.keys.elementAt(index);
+                        return ExpansionTile(
+                          title: Text(
+                            mealType,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.redAccent,
+                            ),
+                          ),
+                          children: mealSuggestions[mealType]!.map((meal) {
+                            return CheckboxListTile(
                               title: Text(
                                 meal,
                                 style: TextStyle(
-                                  color: Color.fromARGB(255, 255, 255,
-                                      255), // Customize text color if needed
+                                  fontSize: 16,
+                                  color: Colors.white,
                                 ),
                               ),
                               value: selectedMeals[mealType]!.contains(meal),
-                              onChanged: (value) {
+                              onChanged: (bool? value) {
                                 setState(() {
-                                  if (value!) {
+                                  if (value == true) {
                                     selectedMeals[mealType]!.add(meal);
                                   } else {
                                     selectedMeals[mealType]!.remove(meal);
                                   }
                                 });
                               },
-                              activeColor:
-                                  Colors.redAccent, // Change checkbox color
-                              checkColor:
-                                  Colors.white, // Change check mark color
-                            ))
-                        .toList(),
-                  );
-                },
+                              activeColor: Colors.redAccent,
+                            );
+                          }).toList(),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton.icon(
+                    onPressed: _savePlan,
+                    icon: Icon(
+                      Icons.save,
+                      color: Colors.redAccent,
+                    ),
+                    label: Text(
+                      'Save Plan',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.redAccent,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: _savePlan,
-              icon: Icon(
-                Icons.save,
-                color: Colors.redAccent, // Set icon color
-              ),
-              label: Text(
-                'Save Changes',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.redAccent, // Set text color
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
+}
+
+void main() {
+  runApp(DietaryPlanUI());
 }

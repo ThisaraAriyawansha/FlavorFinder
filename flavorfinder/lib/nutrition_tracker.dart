@@ -120,6 +120,7 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                           controller: _dateController,
                           decoration: InputDecoration(
                             labelText: 'Date',
+                            labelStyle: TextStyle(color: Colors.redAccent),
                             fillColor: Colors.white,
                             filled: true,
                             border: OutlineInputBorder(),
@@ -140,6 +141,7 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                       controller: _caloriesController,
                       decoration: InputDecoration(
                         labelText: 'Calories',
+                        labelStyle: TextStyle(color: Colors.redAccent),
                         fillColor: Colors.white,
                         filled: true,
                         border: OutlineInputBorder(),
@@ -159,6 +161,7 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                       controller: _proteinsController,
                       decoration: InputDecoration(
                         labelText: 'Proteins (g)',
+                        labelStyle: TextStyle(color: Colors.redAccent),
                         fillColor: Colors.white,
                         filled: true,
                         border: OutlineInputBorder(),
@@ -178,6 +181,7 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                       controller: _fatsController,
                       decoration: InputDecoration(
                         labelText: 'Fats (g)',
+                        labelStyle: TextStyle(color: Colors.redAccent),
                         fillColor: Colors.white,
                         filled: true,
                         border: OutlineInputBorder(),
@@ -197,6 +201,7 @@ class _NutritionTrackerState extends State<NutritionTracker> {
                       controller: _carbsController,
                       decoration: InputDecoration(
                         labelText: 'Carbs (g)',
+                        labelStyle: TextStyle(color: Colors.redAccent),
                         fillColor: Colors.white,
                         filled: true,
                         border: OutlineInputBorder(),
