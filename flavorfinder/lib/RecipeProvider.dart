@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 void main() {
   runApp(MyApp());
@@ -83,43 +84,64 @@ class MyApp extends StatelessWidget {
       instructions:
           'Step 1: Grate coconut and mix with chili, onions, and lime juice\nStep 2: Season with salt and serve as a condiment\nStep 3: Enhances the flavor of any Sri Lankan meal',
     ),
-    // Add more Sri Lankan recipes here
   ];
+
+  Future<List<Recipe>> _fetchRecipes() async {
+    // Simulate network delay
+    await Future.delayed(Duration(seconds: 2));
+    return recipes;
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Sri Lankan Recipes',
       theme: ThemeData(
-        primaryColor: Color.fromARGB(255, 0, 0, 0), // Custom primary color
-        scaffoldBackgroundColor: Colors.grey[900], // Dark background color
+        primaryColor: Color.fromARGB(255, 0, 0, 0),
+        scaffoldBackgroundColor: Colors.grey[900],
         appBarTheme: AppBarTheme(
-          backgroundColor:
-              const Color.fromARGB(255, 0, 0, 0), // Custom app bar color
+          backgroundColor: Color.fromARGB(255, 0, 0, 0),
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      debugShowCheckedModeBanner: false, // Remove debug label
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text(
             'Sri Lankan Recipes',
-            style: TextStyle(color: Colors.white), // Change title color here
+            style: TextStyle(color: Colors.white),
           ),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
-            color: Colors.white, // Change arrow color here
+            color: Colors.white,
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
-          iconTheme: IconThemeData(
-              color: Colors.white), // Change arrow color here as well
+          iconTheme: IconThemeData(color: Colors.white),
         ),
-        body: ListView.builder(
-          itemCount: recipes.length,
-          itemBuilder: (context, index) {
-            return RecipeTile(recipe: recipes[index]);
+        body: FutureBuilder<List<Recipe>>(
+          future: _fetchRecipes(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: SpinKitFadingCircle(
+                  color: Colors.white,
+                  size: 50.0,
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return Center(child: Text('No recipes found'));
+            } else {
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  return RecipeTile(recipe: snapshot.data![index]);
+                },
+              );
+            }
           },
         ),
       ),
