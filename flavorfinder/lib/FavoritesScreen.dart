@@ -9,13 +9,21 @@ class FavoritesScreen extends StatefulWidget {
   _FavoritesScreenState createState() => _FavoritesScreenState();
 }
 
-class _FavoritesScreenState extends State<FavoritesScreen> {
+class _FavoritesScreenState extends State<FavoritesScreen>
+    with SingleTickerProviderStateMixin {
   bool _isLoaded = false;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
     _startLoadingAnimation();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 4),
+      vsync: this,
+    )..repeat();
+    _animation = Tween<double>(begin: 0, end: 2 * 3.14).animate(_controller);
   }
 
   void _startLoadingAnimation() {
@@ -24,6 +32,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         _isLoaded = true;
       });
     });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -76,14 +90,27 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Container(
-              color: Color.fromARGB(255, 0, 0, 0),
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(16.0),
+                border: Border.all(color: Colors.redAccent, width: 2.0),
+              ),
               width: double.infinity,
               height: 200.0,
-              child: const Center(
-                child: Icon(
-                  Icons.restaurant_menu,
-                  color: Colors.redAccent,
-                  size: 100.0,
+              child: Center(
+                child: AnimatedBuilder(
+                  animation: _animation,
+                  builder: (context, child) {
+                    return Transform(
+                      transform: Matrix4.rotationY(_animation.value),
+                      alignment: Alignment.center,
+                      child: Icon(
+                        Icons.restaurant_menu,
+                        color: Colors.redAccent,
+                        size: 100.0,
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -130,8 +157,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
-        transform: Matrix4.translationValues(
-            0, _isLoaded ? 0 : 100, 0), // Animate from below
+        transform: Matrix4.translationValues(0, _isLoaded ? 0 : 100, 0),
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
