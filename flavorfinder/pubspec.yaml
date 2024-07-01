@@ -26,15 +26,27 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+  - assets/placeholder.webp
+  - assets/logo.png
+  - assets/Pasta.jpg
+  - assets/Chicken.jpg
+  - assets/coconut-sambal.jpg
+  - assets/curry.png
+  - assets/fish.jpg
+  - assets/Hoppers.jpeg
+  - assets/breakfast.jpg
+  - assets/desserts.jpeg
+  - assets/DietPlans.jpg
+  - assets/dinner.webp
+  - assets/FoodRecipes.jpg
+  - assets/HealthTips.jpg
+  - assets/Kottu.jpg
+  - assets/lamprais.jpg
+  - assets/lunch.jpg
+  - assets/Milk-Rice.jpg
+  - assets/NutritionTracking.jpg
+  - assets/snacks.jpg
+  - assets/Watalappam.jpg
 
-assets:
-- assets/placeholder.webp
-- assets/logo.png
-- assets/Pasta.jpg
-- assets/Chicken.jpg
-- assets/coconut-sambal.jpg
-- assets/curry.jpg
-- assets/fish.jpg
-- assets/Hoppers.jpeg
-- assets/Pasta.jpg
-- assets/Pasta.jpg
+

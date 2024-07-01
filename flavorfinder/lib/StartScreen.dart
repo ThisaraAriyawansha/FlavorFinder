@@ -182,7 +182,7 @@ class RecipeSection extends StatelessWidget {
           Animate(
             effects: [ScaleEffect(duration: 500.ms, curve: Curves.easeInOut)],
             child: Image.asset(
-              'FoodRecipes.jpg',
+              'assets/FoodRecipes.jpg',
               height: 200,
               fit: BoxFit.cover,
             ).paddedWithShadow(),
@@ -236,7 +236,7 @@ class DietPlanSection extends StatelessWidget {
           Animate(
             effects: [ScaleEffect(duration: 500.ms, curve: Curves.easeInOut)],
             child: Image.asset(
-              'DietPlans.jpg',
+              'assets/DietPlans.jpg',
               height: 200,
               fit: BoxFit.cover,
             ).paddedWithShadow(),
@@ -290,7 +290,7 @@ class NutritionTrackSection extends StatelessWidget {
           Animate(
             effects: [ScaleEffect(duration: 500.ms, curve: Curves.easeInOut)],
             child: Image.asset(
-              'NutritionTracking.jpg',
+              'assets/NutritionTracking.jpg',
               height: 200,
               fit: BoxFit.cover,
             ).paddedWithShadow(),
@@ -344,7 +344,7 @@ class HealthTipsSection extends StatelessWidget {
           Animate(
             effects: [ScaleEffect(duration: 500.ms, curve: Curves.easeInOut)],
             child: Image.asset(
-              'HealthTips.jpg',
+              'assets/HealthTips.jpg',
               height: 200,
               fit: BoxFit.cover,
             ).paddedWithShadow(),
